@@ -33,6 +33,6 @@ list(APPEND Boost_LIBRARIES
         "${boost_LIB_DIR}/libboost_filesystem.so"
         "${boost_LIB_DIR}/libboost_thread.so"
         "${boost_LIB_DIR}/libboost_log.so"
-        "${boost_LIB_DIR}/libboost_stacktrace_backtrace.so"
+        "${boost_LIB_DIR}/libboost_stacktrace_basic.so"
         "${boost_LIB_DIR}/libboost_system.so"
         "${boost_LIB_DIR}/libboost_program_options.so")

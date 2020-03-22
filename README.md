@@ -12,11 +12,11 @@ To use that you ABSOLUTELY need to install a few things
      ```
 - For Fedora:
  -  ```sh
-    sudo yum install gcc-g++ sqlite-devel cmake openssl-devel patchelf
+    sudo yum install gcc-g++ sqlite-devel cmake openssl-devel patchelf make
      ```
 - For FreeBDS:
  -  ```sh
-    sudo pkg install python pkgconf sqlite3 cmake patchelf gcc g++ make
+    sudo pkg install python pkgconf sqlite3 cmake patchelf gcc g++ make linux-headers openssl-dev
      ```
 - For Alpine:
  -  ```sh
@@ -24,12 +24,12 @@ To use that you ABSOLUTELY need to install a few things
      ```
 - For Pacman based helper:
  -  ```sh
-    pacman -S pkgconf gcc cmake python sqlite patchelf openssl
+    pacman -S pkgconf gcc cmake python sqlite patchelf openssl make
      ```
     
 - For Yay based helper:
  -  ```sh
-    yay -S pkgconf gcc cmake python sqlite patchelf openssl
+    yay -S pkgconf gcc cmake python sqlite patchelf openssl make
      ```
     
 ## RUN

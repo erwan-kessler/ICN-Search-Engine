@@ -36,7 +36,7 @@ add_library(libboost::log UNKNOWN IMPORTED)
 set_target_properties(libboost::log PROPERTIES IMPORTED_LOCATION "${boost_LIB_DIR}/libboost_log.so")
 
 add_library(libboost::stacktrace UNKNOWN IMPORTED)
-set_target_properties(libboost::stacktrace PROPERTIES IMPORTED_LOCATION "${boost_LIB_DIR}/libboost_stacktrace_backtrace.so")
+set_target_properties(libboost::stacktrace PROPERTIES IMPORTED_LOCATION "${boost_LIB_DIR}/libboost_stacktrace_basic.so")
 
 ADD_LIBRARY(libboost INTERFACE IMPORTED)
 set_property(TARGET libboost PROPERTY INTERFACE_LINK_LIBRARIES
