@@ -11,7 +11,7 @@ ExternalProject_Add(ndn
         CONFIGURE_COMMAND
         ./waf configure --prefix=<INSTALL_DIR> --boost-includes=${boost_INCLUDE_DIR} --boost-libs=${boost_LIB_DIR}
         BUILD_COMMAND
-        ./waf -p
+        ./waf -p -j ${SPEED}
         INSTALL_COMMAND
         ./waf install &&
         # This is a dirty fix, they need to fix their wscript

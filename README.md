@@ -2,7 +2,7 @@
 
 PIDR about ICN search engine
 
-
+## Pre-requisites
 To use that you ABSOLUTELY need to install a few things
 
 - For Debian based (Ubuntu, Kali Linux, Tails):
@@ -31,3 +31,26 @@ To use that you ABSOLUTELY need to install a few things
  -  ```sh
     yay -S pkgconf gcc cmake python sqlite patchelf
      ```
+    
+## RUN
+The first make will take a while since it requires to make boost and libndn, subsequent build will be way faster.
+The build process can take up to 2GB of space and take up to 10min (the compilation is not speed up by default but you 
+can change so in the cmake or by overriding the SPEED variable cmake -DSPEED=6).
+The build process do require an internet connection for the first time it runs.
+  - ```sh
+    cmake .
+    ```
+  - ```sh
+    make client
+    ```
+  - ```sh
+    make server
+    ```
+Once those command are done, you can now run as many client and server as you want, you just need to specify a 
+filesystem to work with.
+
+
+## EXTRAS
+To clean you can just type `cmake . && make Clean` (beware of the Capital letter)
+
+    

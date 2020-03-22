@@ -6,6 +6,10 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-O2 -ggdb3 -pedantic -Wall -Wextra -Wnon-virtual-dtor -Wno-unused-parameter")
 
+# Set here the number of cores to use (default is 1)
+set(SPEED 1)
+
+
 # include the scripts needed for the build of their relatives libraries
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(boost)

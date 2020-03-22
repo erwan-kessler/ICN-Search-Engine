@@ -23,7 +23,7 @@ ExternalProject_Add(boost
         # edit here the libs needed by ndn
         --prefix=<INSTALL_DIR>
         BUILD_COMMAND
-        ./b2 install link=shared variant=release threading=multi runtime-link=shared # by default
+        ./b2 install -d0 link=shared variant=release threading=multi runtime-link=shared -j ${SPEED} # by default
         INSTALL_COMMAND ""
         INSTALL_DIR ${boost_INSTALL})
 
