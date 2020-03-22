@@ -20,16 +20,16 @@ To use that you ABSOLUTELY need to install a few things
      ```
 - For Alpine:
  -  ```sh
-    apk add python pkgconf sqlite-dev gcc cmake patchelf g++ make linux-headers
+    apk add python pkgconf sqlite-dev gcc cmake patchelf g++ make linux-headers openssl-dev
      ```
 - For Pacman based helper:
  -  ```sh
-    pacman -S pkgconf gcc cmake python sqlite patchelf
+    pacman -S pkgconf gcc cmake python sqlite patchelf openssl
      ```
     
 - For Yay based helper:
  -  ```sh
-    yay -S pkgconf gcc cmake python sqlite patchelf 
+    yay -S pkgconf gcc cmake python sqlite patchelf openssl
      ```
     
 ## RUN
