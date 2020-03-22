@@ -16,11 +16,11 @@ To use that you ABSOLUTELY need to install a few things
      ```
 - For FreeBDS:
  -  ```sh
-    sudo pkg install python pkgconf sqlite3 cmake patchelf
+    sudo pkg install python pkgconf sqlite3 cmake patchelf gcc g++ make
      ```
 - For Alpine:
  -  ```sh
-    pkg add python pkgconf sqlite3 cmake patchelf
+    apk add python pkgconf sqlite-dev gcc cmake patchelf g++ make linux-headers
      ```
 - For Pacman based helper:
  -  ```sh
@@ -29,7 +29,7 @@ To use that you ABSOLUTELY need to install a few things
     
 - For Yay based helper:
  -  ```sh
-    yay -S pkgconf gcc cmake python sqlite patchelf
+    yay -S pkgconf gcc cmake python sqlite patchelf 
      ```
     
 ## RUN
