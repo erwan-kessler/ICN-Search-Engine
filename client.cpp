@@ -28,7 +28,7 @@ public:
     explicit
     Client(ndn::Face& face, const std::string& filename)
             : m_face(face)
-            , m_baseName(ndn::Name("/my-local-prefix/simple-fetch/file").append(filename))
+            , m_baseName(ndn::Name("/test").append(filename))
             , m_currentSeqNo(0)
     {
         std::cerr << "Base name: " << m_baseName << std::endl;
@@ -37,20 +37,18 @@ public:
 
 private:
     void
-    requestNext()
-    {
+    requestNext(){
         ndn::Name nextName = ndn::Name(m_baseName).appendSequenceNumber(m_currentSeqNo);
         std::cerr << ">> C++ " << nextName << std::endl;
         m_face.expressInterest(ndn::Interest(nextName).setMustBeFresh(true),
-                               std::bind(&Client::onData, this, _2),
+                               [this](auto &&, auto && PH2) { onData(PH2); },
                                std::bind(&Client::onNack, this, _1),
                                std::bind(&Client::onTimeout, this, _1));
         ++m_currentSeqNo;
     }
 
 
-    void
-    onData(const ndn::Data& data)
+    void onData(const ndn::Data& data)
     {
         std::cerr << "<< C++ "
                   << std::string(reinterpret_cast<const char*>(data.getContent().value()),
@@ -64,14 +62,12 @@ private:
         requestNext();
     }
 
-    void
-    onNack(const ndn::Interest& interest)
+    void onNack(const ndn::Interest& interest)
     {
         std::cerr << "<< got NACK for " << interest << std::endl;
     }
 
-    void
-    onTimeout(const ndn::Interest& interest)
+    void onTimeout(const ndn::Interest& interest)
     {
         // re-express interest
         std::cerr << "<< C++ timeout for " << interest << std::endl;

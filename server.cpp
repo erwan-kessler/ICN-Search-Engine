@@ -23,28 +23,22 @@
 #include <iostream>
 #include <string>
 
-class Server
-{
+class Server {
 public:
-    Server(ndn::Face& face)
-            : m_face(face)
-            , m_baseName("/my-local-prefix/simple-fetch/file")
-            , m_counter(0)
-    {
+    explicit Server(ndn::Face &face) : m_face(face), m_baseName("/test"), m_counter(0) {
         m_face.setInterestFilter(m_baseName,
-                                 std::bind(&Server::onInterest, this, _2),
+                                 [this](auto &&, auto &&PH2) { onInterest(PH2); },
                                  std::bind([] {
                                      std::cerr << "Prefix registered" << std::endl;
                                  }),
-                                 [] (const ndn::Name& prefix, const std::string& reason) {
+                                 [](const ndn::Name &prefix, const std::string &reason) {
                                      std::cerr << "Failed to register prefix: " << reason << std::endl;
                                  });
     }
 
 private:
-    void
-    onInterest(const ndn::Interest& interest)
-    {
+    void onInterest(const ndn::Interest &interest) {
+
         std::cerr << "<< interest for " << interest << std::endl;
 
         // create data packet with the same name as interest
@@ -54,7 +48,7 @@ private:
         std::ostringstream os;
         os << "C++ LINE #" << (m_counter++) << std::endl;
         std::string content = os.str();
-        data->setContent(reinterpret_cast<const uint8_t*>(content.c_str()), content.size());
+        data->setContent(reinterpret_cast<const uint8_t *>(content.c_str()), content.size());
 
         // set metainfo parameters
         data->setFreshnessPeriod(ndn::time::seconds(10));
@@ -67,15 +61,14 @@ private:
     }
 
 private:
-    ndn::Face& m_face;
+    ndn::Face &m_face;
     ndn::KeyChain m_keyChain;
     ndn::Name m_baseName;
     uint64_t m_counter;
 };
 
 int
-main(int argc, char** argv)
-{
+main(int argc, char **argv) {
     try {
         // create Face instance
         ndn::Face face;
@@ -86,7 +79,7 @@ main(int argc, char** argv)
         // start processing loop (it will block forever)
         face.processEvents();
     }
-    catch (const std::exception& e) {
+    catch (const std::exception &e) {
         std::cerr << "ERROR: " << e.what() << std::endl;
     }
     return 0;

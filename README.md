@@ -8,7 +8,7 @@ To use that you ABSOLUTELY need to install a few things
 - For Debian based (Ubuntu, Kali Linux, Tails):
 
  -  ```sh
-    sudo apt install build-essential libssl-dev libsqlite3-dev pkg-config cmake patchelf
+    sudo apt install build-essential libssl-dev libsqlite3-dev pkg-config cmake patchelf libsystemd-dev libpcap-dev
      ```
 - For Fedora:
  -  ```sh
@@ -16,20 +16,20 @@ To use that you ABSOLUTELY need to install a few things
      ```
 - For FreeBDS:
  -  ```sh
-    sudo pkg install python pkgconf sqlite3 cmake patchelf gcc g++ make linux-headers openssl-dev
+    sudo pkg install python pkgconf sqlite3 cmake patchelf gcc g++ make linux-headers openssl-dev libsystemd-dev libpcap-dev
      ```
 - For Alpine:
  -  ```sh
-    apk add python pkgconf sqlite-dev gcc cmake patchelf g++ make linux-headers openssl-dev
+    apk add python pkgconf sqlite-dev gcc cmake patchelf g++ make linux-headers openssl-dev libpcap-dev
      ```
 - For Pacman based helper:
  -  ```sh
-    pacman -S pkgconf gcc cmake python sqlite patchelf openssl make
+    pacman -S pkgconf gcc cmake python sqlite patchelf openssl make libpcap
      ```
     
 - For Yay based helper:
  -  ```sh
-    yay -S pkgconf gcc cmake python sqlite patchelf openssl make
+    yay -S pkgconf gcc cmake python sqlite patchelf openssl make libpcap
      ```
     
 ## RUN

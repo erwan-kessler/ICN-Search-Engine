@@ -8,18 +8,20 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-O2 -ggdb3 -pedantic -Wall -Wextra -Wnon
 
 # Set here the number of cores to use (default is 1)
 if (NOT DEFINED SPEED)
-	set(SPEED 1)
+	set(SPEED 10)
 endif()
 
 # include the scripts needed for the build of their relatives libraries
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(boost)
 include(ndn)
+include(nfd)
 
 # Chain to build ndn and make it a shared library target, depends of libboost below
 ADD_LIBRARY(libndn SHARED IMPORTED)
 SET_TARGET_PROPERTIES(libndn PROPERTIES IMPORTED_LOCATION ${ndn_LIBRARIES})
-add_dependencies(libndn ndn)
+add_dependencies(libndn nfd)
+add_dependencies(nfd ndn)
 add_dependencies(ndn libboost)
 
 # This whole chain can be removed and replaced with a dependency to boost only with the correct change below in NDN_LIBS
@@ -61,11 +63,17 @@ list(APPEND NDN_LIBS libndn libboost) # could use ${Boost_LIBRARIES} instead of 
 add_executable(server server.cpp)
 include_directories(server PUBLIC ${NDN_INCLUDE_DIRS})
 target_link_libraries(server ${NDN_LIBS})
+add_custom_command(TARGET server POST_BUILD
+		COMMAND ${nfd_INSTALL}/bin/nfd-start)
 
 add_executable(client client.cpp)
 include_directories(client PUBLIC ${NDN_INCLUDE_DIRS})
 target_link_libraries(client ${NDN_LIBS})
+add_custom_command(TARGET client POST_BUILD
+		COMMAND ${nfd_INSTALL}/bin/nfd-start)
 
+
+# Cleaning task
 file(WRITE null.cpp "int main() { return 0; }")
 add_executable(Clean null.cpp)
 add_custom_command(TARGET Clean POST_BUILD
