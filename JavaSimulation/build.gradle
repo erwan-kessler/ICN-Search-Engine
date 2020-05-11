@@ -1,0 +1,108 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.runtime' version '1.3.0'
+    id 'jacoco'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://dl.bintray.com/dukke/maven'}
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_13
+    targetCompatibility = JavaVersion.VERSION_13
+}
+
+
+javafx {
+    version = "13"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+}
+
+application {
+    mainClassName = 'edu.PIDR.SearchEngine.Main'
+    applicationName = 'SearchEngine'
+}
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+runtime {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    jpackage {
+        /* jpackageHome = '/usr/lib/jvm/jdk14' */
+        if (org.gradle.internal.os.OperatingSystem.current().windows) {
+            installerType = 'msi'
+            /* imageOptions = ['--win-console'] */
+            installerOptions = ['--win-per-user-install', '--win-dir-chooser', '--win-menu', '--win-shortcut']
+        }
+    }
+}
+
+dependencies {
+    implementation('com.github.goxr3plus:FX-BorderlessScene:4.3.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.5.2')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+    implementation('rome:rome:1.0')
+    implementation('org.xerial:sqlite-jdbc:3.28.0')
+    implementation('org.jfxtras:jmetro:11.6')
+    implementation('org.apache.commons:commons-lang3:3.9')
+    /* comment to remove cross-platform jar: */
+    runtimeOnly('org.openjfx:javafx-graphics:$javafx.version:win')
+    runtimeOnly('org.openjfx:javafx-graphics:$javafx.version:linux')
+    runtimeOnly('org.openjfx:javafx-graphics:$javafx.version:mac')
+}
+test {
+    useJUnitPlatform {
+        includeTags 'fast', 'smoke & feature-a'
+        includeEngines 'junit-jupiter'
+        maxHeapSize = '1G'
+    }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+    testLogging {
+        outputs.upToDateWhen { false }
+        showStandardStreams = true
+    }
+    finalizedBy(jacocoTestReport)
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Main-Class': project.getProperty('mainClassName')
+        )
+
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Main-Class': project.getProperty('mainClassName')
+        )
+
+    }
+    project.archivesBaseName = 'RELEASE_DAY_'
+    from {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        /* /!\ Required to launch from a non-JavaFX start
+         * https://github.com/javafxports/openjdk-jfx/issues/236
+         */
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}

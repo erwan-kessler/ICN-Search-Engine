@@ -1,0 +1,44 @@
+image: gradle:jdk13
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  
+cache:
+  paths:
+    - .gradle/caches
+    - .gradle/wrapper
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script: gradle test
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+  artifacts:
+    paths:
+      - build/reports
+    expire_in: 1 week
+
+build:
+  stage: build
+  script: gradle --build-cache fatJar
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+  artifacts:
+    paths:
+      - build/libs
+    expire_in: 1 week
+
+after_script:
+  - echo "End CI"

@@ -1,0 +1,9 @@
+.background{
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 1px;
+}
+.background-back{
+    -fx-background-color: linear-gradient(to top left, #778899, #DCDCDC);
+}
+

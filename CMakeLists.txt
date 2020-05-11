@@ -87,6 +87,15 @@ add_executable(client client.cpp)
 include_directories(client PUBLIC ${NDN_INCLUDE_DIRS})
 target_link_libraries(client ${NDN_LIBS})
 
+#adding new executables and linking
+add_executable(producer producer.cpp)
+include_directories(producer PUBLIC ${NDN_INCLUDE_DIRS})
+target_link_libraries(producer ${NDN_LIBS})
+
+add_executable(consumer consumer.cpp)
+include_directories(consumer PUBLIC ${NDN_INCLUDE_DIRS})
+target_link_libraries(consumer ${NDN_LIBS})
+
 
 # Cleaning task
 file(WRITE null.cpp "int main() { return 0; }")
