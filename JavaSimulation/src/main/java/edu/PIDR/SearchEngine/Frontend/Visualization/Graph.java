@@ -14,7 +14,7 @@ public class Graph {
 
     public Graph(Network network) throws Exception {
         for (Router router : network.getRouters()) {
-            Vertex vertex=new Vertex(router.getName(),new Position(0,0,0),router,router.getInterfaces().size());
+            Vertex vertex=new Vertex(router.getName(),new Position(0,0,0),router,router.getInterfaces().size(), Vertex.ServerType.ROUTER);
             vertices.add(vertex);
         }
         for(Router router:network.getRouters()){

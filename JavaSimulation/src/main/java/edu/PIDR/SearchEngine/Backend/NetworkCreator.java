@@ -58,4 +58,8 @@ public class NetworkCreator {
             }
         }
     }
+
+    public Network getNetwork() {
+        return network;
+    }
 }

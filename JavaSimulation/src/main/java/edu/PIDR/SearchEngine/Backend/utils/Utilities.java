@@ -15,7 +15,7 @@ public class Utilities {
     public int getRandomNumberInRange(Bounds bounds) {
         int min = bounds.getMin();
         int max = bounds.getMax();
-        if (min >= max) {
+        if (min > max) {
             throw new IllegalArgumentException("max must be greater than min");
         }
 
