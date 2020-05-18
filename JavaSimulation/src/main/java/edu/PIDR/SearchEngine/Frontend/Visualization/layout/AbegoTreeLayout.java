@@ -29,11 +29,11 @@ public class AbegoTreeLayout implements Layout {
 	public void execute(Graph graph) {
 		final DefaultTreeForTreeLayout<ICell> layout = new DefaultTreeForTreeLayout<>(graph.getModel().getRoot());
 		addRecursively(layout, graph.getModel().getRoot());
-		final NodeExtentProvider<ICell> nodeExtentProvider = new NodeExtentProvider<ICell>() {
+		final NodeExtentProvider<ICell> nodeExtentProvider = new NodeExtentProvider<>() {
 
 			@Override
 			public double getWidth(ICell tn) {
-				if(tn == graph.getModel().getRoot()) {
+				if (tn == graph.getModel().getRoot()) {
 					return 0;
 				}
 				return graph.getGraphic(tn).getWidth();
@@ -41,7 +41,7 @@ public class AbegoTreeLayout implements Layout {
 
 			@Override
 			public double getHeight(ICell tn) {
-				if(tn == graph.getModel().getRoot()) {
+				if (tn == graph.getModel().getRoot()) {
 					return 0;
 				}
 				return graph.getGraphic(tn).getHeight();
@@ -49,6 +49,7 @@ public class AbegoTreeLayout implements Layout {
 		};
 		final TreeLayout<ICell> treeLayout = new TreeLayout<>(layout, nodeExtentProvider, configuration);
 		treeLayout.getNodeBounds().entrySet().stream().filter(entry -> entry.getKey() != graph.getModel().getRoot()).forEach(entry -> {
+			System.out.println(entry.getValue().toString());
 			graph.getGraphic(entry.getKey()).setLayoutX(entry.getValue().getX());
 			graph.getGraphic(entry.getKey()).setLayoutY(entry.getValue().getY());
 		});
