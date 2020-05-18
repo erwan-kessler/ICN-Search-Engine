@@ -1,13 +1,13 @@
-package edu.PIDR.SearchEngine.Backend.components;
+package edu.PIDR.SearchEngine.Backend.Components;
 
-import edu.PIDR.SearchEngine.Backend.transfer.Connection;
+import edu.PIDR.SearchEngine.Backend.Transfer.Connection;
 
 import java.util.ArrayList;
 
 public class SES extends Server{
     private final ArrayList<Connection> logicalConnections=new ArrayList<>();
-    public SES(int opsPerTick){
-        super(opsPerTick);
+    public SES(int opsPerTick,int id){
+        super(opsPerTick,"SES "+id);
     }
 
     @Override

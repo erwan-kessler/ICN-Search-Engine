@@ -1,6 +1,6 @@
-package edu.PIDR.SearchEngine.Backend.managers;
+package edu.PIDR.SearchEngine.Backend.Managers;
 
-import edu.PIDR.SearchEngine.Backend.components.Server;
+import edu.PIDR.SearchEngine.Backend.Components.Server;
 
 import java.util.ArrayList;
 

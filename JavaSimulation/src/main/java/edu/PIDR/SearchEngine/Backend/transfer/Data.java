@@ -1,4 +1,4 @@
-package edu.PIDR.SearchEngine.Backend.transfer;
+package edu.PIDR.SearchEngine.Backend.Transfer;
 
 public class Data {
     private final String body;

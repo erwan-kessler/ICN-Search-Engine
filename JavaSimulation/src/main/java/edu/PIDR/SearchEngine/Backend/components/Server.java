@@ -1,9 +1,9 @@
-package edu.PIDR.SearchEngine.Backend.components;
+package edu.PIDR.SearchEngine.Backend.Components;
 
-import edu.PIDR.SearchEngine.Backend.transfer.Connection;
-import edu.PIDR.SearchEngine.Backend.transfer.Data;
-import edu.PIDR.SearchEngine.Backend.transfer.Interest;
-import edu.PIDR.SearchEngine.Backend.transfer.Interface;
+import edu.PIDR.SearchEngine.Backend.Transfer.Connection;
+import edu.PIDR.SearchEngine.Backend.Transfer.Data;
+import edu.PIDR.SearchEngine.Backend.Transfer.Interest;
+import edu.PIDR.SearchEngine.Backend.Transfer.Interface;
 
 import java.util.*;
 
@@ -11,6 +11,7 @@ public abstract class Server {
     public static boolean DEBUG = true;
     public int limitPrefixMatch = 5;
     private int opsPerTick;
+    private final String name;
     private final HashMap<Interface, Connection> connections = new HashMap<>();
     private final HashMap<String, ArrayList<Interface>> PIT = new HashMap<>();
     private final HashMap<String, Interface> FIB = new HashMap<>();
@@ -18,8 +19,13 @@ public abstract class Server {
     private final ArrayList<Interest> interests = new ArrayList<>();
     private final ArrayList<Interface> interfaces = new ArrayList<>();
 
-    public Server(int opsPerTick) {
+    public Server(int opsPerTick,String name) {
         this.opsPerTick = opsPerTick;
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public ArrayList<Interest> getInterests() {

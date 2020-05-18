@@ -1,4 +1,4 @@
-package edu.PIDR.SearchEngine.Backend.transfer;
+package edu.PIDR.SearchEngine.Backend.Transfer;
 
 import java.util.ArrayList;
 // this depic a single way pipe

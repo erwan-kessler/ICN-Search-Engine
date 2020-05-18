@@ -1,7 +1,7 @@
-package edu.PIDR.SearchEngine.Backend.components;
+package edu.PIDR.SearchEngine.Backend.Components;
 
-import edu.PIDR.SearchEngine.Backend.managers.NetworkManager;
-import edu.PIDR.SearchEngine.Backend.managers.TickManager;
+import edu.PIDR.SearchEngine.Backend.Managers.NetworkManager;
+import edu.PIDR.SearchEngine.Backend.Managers.TickManager;
 
 import java.util.ArrayList;
 

@@ -25,7 +25,7 @@ javafx {
 }
 
 application {
-    mainClassName = 'edu.PIDR.SearchEngine.Main'
+    mainClassName = 'edu.PIDR.SearchEngine.Frontend.Visualization.graph.MainApp'//'edu.PIDR.SearchEngine.Main'
     applicationName = 'SearchEngine'
 }
 allprojects {
@@ -55,6 +55,7 @@ dependencies {
     implementation('org.xerial:sqlite-jdbc:3.28.0')
     implementation('org.jfxtras:jmetro:11.6')
     implementation('org.apache.commons:commons-lang3:3.9')
+    implementation('org.abego.treelayout:org.abego.treelayout.core:1.0.3')
     /* comment to remove cross-platform jar: */
     runtimeOnly('org.openjfx:javafx-graphics:$javafx.version:win')
     runtimeOnly('org.openjfx:javafx-graphics:$javafx.version:linux')

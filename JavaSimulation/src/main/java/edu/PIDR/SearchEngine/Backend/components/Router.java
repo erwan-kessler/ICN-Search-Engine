@@ -1,13 +1,13 @@
-package edu.PIDR.SearchEngine.Backend.components;
+package edu.PIDR.SearchEngine.Backend.Components;
 
-import edu.PIDR.SearchEngine.Backend.transfer.*;
+import edu.PIDR.SearchEngine.Backend.Transfer.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Router extends Server{
-    public Router(int opsPerTick){
-        super(opsPerTick);
+    public Router(int opsPerTick,int id){
+        super(opsPerTick,"Router "+id);
     }
 
     @Override
@@ -35,7 +35,9 @@ public class Router extends Server{
                                 ArrayList<Interface> interfaces=getPIT().get(packet.getData().getName());
                                 for (Interface anInterface : interfaces) {
                                     // transmit to each PIT interface the packet
-                                    getConnections().get(anInterface).addPacket(packet);
+                                    if (getConnections().get(anInterface).addPacket(packet)){
+                                        System.out.println("Warning saturated connection");
+                                    }
                                     System.out.println("A new packet was sent on: "+anInterface+" it contains: "+packet.getData().getName());
                                 }
                             }else{
@@ -60,7 +62,9 @@ public class Router extends Server{
                 // using cache
                 if (DEBUG)System.out.println("Interest: "+interest.getName()+" have been found in CS");
                 Packet packet=new Packet(getCS().get(interest.getName()));
-                getConnections().get(interest.getInterfaceReceived()).addPacket(packet);
+                if (getConnections().get(interest.getInterfaceReceived()).addPacket(packet)){
+                    System.out.println("Warning saturated connection");
+                }
             }else {
                 // adding to PIT the interest (will be removed once it is resolved)
                 if (!getPIT().containsKey(interest.getName())) {

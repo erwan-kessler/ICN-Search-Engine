@@ -1,8 +1,13 @@
-package edu.PIDR.SearchEngine.Backend.components;
+package edu.PIDR.SearchEngine.Backend.Components;
 
-public class Root extends SES {
+public class Root extends Server {
     public Root(int opsPerTick){
-        super(opsPerTick);
+        super(opsPerTick,"ROOT");
+    }
+
+    @Override
+    public void update() {
+
     }
 }
 

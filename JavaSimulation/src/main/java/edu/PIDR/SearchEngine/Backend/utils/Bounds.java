@@ -1,4 +1,4 @@
-package edu.PIDR.SearchEngine.Backend.utils;
+package edu.PIDR.SearchEngine.Backend.Utils;
 
 public class Bounds {
     private final int min;
